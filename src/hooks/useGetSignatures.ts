@@ -1,17 +1,19 @@
 // hooks/useGetSignatures.ts
 import { useQuery } from '@tanstack/react-query'
-import { PublicKey } from '@solana/web3.js'
-import { useConnection } from './useConnection'
 import { Address } from './useGetBalance'
+import { useWalletUi, useWalletUiCluster } from '@/components/wallet/wallet-hooks.js'
 
 export function useGetSignatures({ address }: { address: Address }) {
-  const connection = useConnection()
+  const { client } = useWalletUi () as unknown as { client: { rpc: any } } // ou mieux : typé proprement
+  const { cluster } = useWalletUiCluster()
+
+  if (!client.rpc) {
+    throw new Error('client.rpc is undefined — verify your client setup')
+  }
 
   return useQuery({
-    queryKey: ['get-signatures', address],
-    queryFn: async () => {
-      const pubkey = new PublicKey(address)
-      return await connection.getSignaturesForAddress(pubkey)
-    },
+    queryKey: ['get-signatures', { cluster, address }],
+    queryFn: () => client.rpc.getSignaturesForAddress(address).send(),
   })
 }
+
