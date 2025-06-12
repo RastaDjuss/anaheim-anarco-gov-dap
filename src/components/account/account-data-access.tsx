@@ -9,7 +9,7 @@ import {
   airdropFactory,
   appendTransactionMessageInstruction,
   assertIsTransactionMessageWithSingleSendingSigner,
-  Blockhash,
+  Blockhash, ClusterUrl,
   createTransactionMessage,
   getBase58Decoder,
   lamports,
@@ -26,15 +26,15 @@ import {
 } from 'gill'
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useTransactionToast } from '@/components/use-transaction-toast.tsx'
+import { useTransactionToast } from '@/components/use-transaction-toast'
 import { toast } from 'sonner'
-import { useWalletUi, useWalletUiCluster } from '../wallet/wallet-hooks.ts'
+import { useWalletUi, useWalletUiCluster } from '../wallet/wallet-hooks'
 import { Connection, PublicKey } from '@solana/web3.js'
-import { ClusterDisplay } from '@/hooks/useSolanaClient.tsx'
+import { ClusterDisplay } from '@/hooks/useSolanaClient'
 import { useMemo } from 'react'
 import { undefined } from 'zod'
 
-export type SolanaClient<TClusterUrl> = {
+export type SolanaClient<TClusterUrl extends ClusterUrl> = {
   rpc: RpcFromTransport<SolanaRpcApiFromTransport<RpcTransportFromClusterUrl<TClusterUrl>>, RpcTransportFromClusterUrl<TClusterUrl>>
   rpcSubscriptions: RpcSubscriptions<SolanaRpcSubscriptionsApi> & TClusterUrl
   sendAndConfirmTransaction: SendAndConfirmTransactionWithSignersFunction

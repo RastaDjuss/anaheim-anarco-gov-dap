@@ -1,18 +1,28 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import * as React from 'react'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { getExplorerLink, GetExplorerLinkArgs } from 'gill'
 import { Button } from '@/components/ui/button'
 import { AppAlert } from '@/components/app-alert'
 import { useWalletUi, useWalletUiCluster } from '@/components/wallet/wallet-hooks'
+import { useClusterConfig, ClusterLabel } from '@/hooks/getClusterConfig'
 
+export function ClusterDisplay({ clusterLabel }: { clusterLabel: ClusterLabel }) {
+  const config = useClusterConfig(clusterLabel)
+
+  return (
+    <div className="text-xs text-gray-300">
+      Cluster: <span className="font-semibold">{config.label}</span><br />
+      Endpoint: <code className="text-yellow-400">{config.urlOrMoniker}</code>
+    </div>
+  )
+}
 export function ExplorerLink({
-  className,
-  label = '',
-  ...link
-}: GetExplorerLinkArgs & {
+                               className,
+                               label = '',
+                               ...link
+                             }: GetExplorerLinkArgs & {
   className?: string
   label: string
 }) {
@@ -21,7 +31,7 @@ export function ExplorerLink({
       href={getExplorerLink(link)}
       target="_blank"
       rel="noopener noreferrer"
-      className={className ? className : `link font-mono`}
+      className={className ?? 'link font-mono'}
     >
       {label}
     </a>
@@ -36,11 +46,10 @@ export function ClusterChecker({ children }: { children: ReactNode }) {
     queryKey: ['version', { cluster, endpoint: cluster.urlOrMoniker }],
     queryFn: () => client.getVersion(),
     retry: 1,
-  });
+  })
 
-  if (query.isLoading) {
-    return null
-  }
+  if (query.isLoading) return null
+
   if (query.isError || !query.data) {
     return (
       <AppAlert
@@ -54,5 +63,6 @@ export function ClusterChecker({ children }: { children: ReactNode }) {
       </AppAlert>
     )
   }
-  return children
+
+  return <>{children}</>
 }

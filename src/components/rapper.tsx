@@ -1,15 +1,35 @@
-import React, { useEffect } from 'react'
-import { useWrappedConnection } from '@/hooks/useWrappedConnection'
+'use client'
+
+import { useEffect } from 'react'
 import { PublicKey } from '@solana/web3.js'
+import { useWrappedConnection } from '@/hooks/useWrappedConnection'
+import { getClusterUrl } from '@/hooks/getClusterUrl'
+import { ClusterDisplay } from '@/components/cluster/cluster-ui'
+import { ClusterLabel } from '@/hooks/getClusterConfig'
+
+const DEFAULT_ADDRESS = '9xQeWvG816bUx9EPZ2gfrzjp1edw6uX7yjzFZZLL8Mjt'
 
 export function Rapper() {
-  const rpcUrl = 'https://api.devnet.solana.com'
+  const rpcUrl = getClusterUrl(CLUSTER)
   const wrapped = useWrappedConnection(rpcUrl)
 
   useEffect(() => {
-    const address = new PublicKey('9xQeWvG816bUx9EPZ2gfrzjp1edw6uX7yjzFZZLL8Mjt')
-    wrapped.rpc.getSignaturesForAddress(address).send().then(console.log)
+    const address = new PublicKey(DEFAULT_ADDRESS)
+    wrapped.rpc
+      .getSignaturesForAddress(address)
+      .send()
+      .then((sigs: any) => {
+        console.log(`Signatures for ${DEFAULT_ADDRESS}:`, sigs)
+      })
+      .catch(console.error)
   }, [wrapped])
 
-  return <div>Check console for data</div>
+  return (
+    <div className="bg-black text-white p-4 rounded-xl mt-6">
+      <ClusterDisplay clusterLabel={CLUSTER} />
+      <p className="mt-2 text-sm text-gray-400">
+        Monitoring signatures on <code>{DEFAULT_ADDRESS}</code> via <code>{rpcUrl}</code>
+      </p>
+    </div>
+  )
 }
