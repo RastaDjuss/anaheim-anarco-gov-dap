@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Connection } from '@solana/web3.js'
-import { wrapConnectionWithRpc } from '@/lib/wrapConnectionWithRpc'
+import { wrapConnectionWithRpc } from '@/lib/solana/wrapConnectionWithRpc.ts'
 
 // Typage clair de la structure retournée par wrapConnectionWithRpc
 type WrappedConnection = ReturnType<typeof wrapConnectionWithRpc>

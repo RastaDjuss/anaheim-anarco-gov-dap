@@ -2,6 +2,34 @@
   "codename": "anaheim",
   "type": "dapp",
   "platform": "Solana",
+  "status": "alpha",
+  "packageManager": "pnpm",
+  "anchor": {
+    "version": "0.31.1",
+    "cluster": "devnet",
+    "wallet": "~/.config/solana/id.json",
+    "programs": {
+      "anaheim": "78aAD6rT9QNwjXEUwrrTwRdtE35khVh1opAQLjMsxvVb",
+      "journal": "F4ao4JM1dfxnKNAUJtJP6mPyrHD7QeYEBZwLU5ANVThd"
+    },
+    "scripts": {
+      "test_jest": "../node_modules/.bin/jest --preset ts-jest",
+      "test_mocha": "mocha -t 1000000 tests/"
+    },
+    "validator": {
+      "bind_address": "127.0.0.1",
+      "rpc_port": 8899,
+      "ledger": ".anchor/test-ledger",
+      "startup_wait": 5000,
+      "shutdown_wait": 2000,
+      "upgradeable": false
+    },
+    "registry": "https://api.apr.dev",
+    "features": {
+      "resolution": true,
+      "skip-lint": false
+    }
+  },
   "components": {
     "mining": "src/components/mining/mining-panel.tsx",
     "governance": "Reddit-style UI with subreddits & voting",
@@ -9,13 +37,29 @@
       "main_token": "r=3.57",
       "rewards": "automatic, passive, Thorchain-style",
       "multi_tokens": true
+    },
+    "journal_integration": {
+      "purpose": "event tracking, governance logging, proof-of-activity",
+      "source": "Solana Journal Program (prebuilt)",
+      "usage": [
+        "log miner activity per epoch",
+        "track vote events and proposals",
+        "record user claims and citizen verifications"
+      ]
     }
   },
   "integration": {
-    "DAOs": ["realms.today", "Chaotic Fractal AttraKThor DAO"],
+    "DAOs": [
+      "realms.today",
+      "Chaotic Fractal AttraKThor DAO"
+    ],
     "identity": "Medicare / NAS authentication",
-    "staking": "progressive laundering system"
+    "staking": "progressive laundering system",
+    "journal_program": "use journal for auditability + verifiable history"
   },
-  "status": "alpha",
-  "next": ["connect mining to r=3.57", "smart contract claim system", "auth citizen"]
+  "next": [
+    "connect mining to r=3.57",
+    "smart contract claim system",
+    "auth citizen"
+  ]
 }

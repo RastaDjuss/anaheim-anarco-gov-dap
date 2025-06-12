@@ -2,8 +2,8 @@
 // hooks/useRequestAirdrop.ts
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
-import { useConnection } from './useConnection'
-import { Address } from './useGetBalance'
+import { useConnection } from './useConnection.tsx'
+import { Address } from './useGetBalance.tsx'
 import { toast } from 'sonner'
 
 export function useRequestAirdrop({ address }: { address: Address }) {

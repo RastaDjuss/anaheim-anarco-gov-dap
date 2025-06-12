@@ -1,7 +1,7 @@
 // hooks/useGetBalance.ts
 import { useQuery } from '@tanstack/react-query'
 import { PublicKey } from '@solana/web3.js'
-import { useConnection } from './useConnection'
+import { useConnection } from './useConnection.tsx'
 
 export type Address = string
 

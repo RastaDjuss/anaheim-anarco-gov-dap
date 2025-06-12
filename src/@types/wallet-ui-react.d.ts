@@ -1,26 +1,38 @@
 declare module '@wallet-ui/react' {
-  export const useSolanaWallet: any;
-  export const useSolanaWalletAddress: any;
-  export const useSolanaChain: any;
-  export const useSolanaRpc: any;
-  export const SolanaWalletProvider: any;
-  export const SolanaChainProvider: any;
-  export const WalletUiDropdown = any;
-  export const WalletUiClusterDropdown = any;
+  import * as React from 'react';
 
+  export const useSolanaWallet: () => {
+    connected: boolean;
+    publicKey: string | null;
+    connect: () => Promise<void>;
+    disconnect: () => Promise<void>;
+  };
 
-  export class WalletUi {
+  export interface WalletUiDropdownProps {
+    onSelect?: (value: string) => void;
+    selected?: string;
+    options?: string[];
   }
 
-  export class createWalletUiConfig {
+  export const WalletUiDropdown: React.FC<WalletUiDropdownProps>;
+
+  export interface WalletProviderProps {
+    children: React.ReactNode;
+    defaultCluster?: string;
+    autoConnect?: boolean;
   }
 
-  export class createSolanaLocalnet {
+  export interface WalletProviderState {
+    connected?: boolean;
+    walletName?: string;
   }
 
-  export class createSolanaDevnet {
-  }
+  export class WalletProvider extends React.Component<
+    WalletProviderProps,
+    WalletProviderState
+  > {}
 
-  export class WalletUiProvider {
+  export class useWalletUi {
+    // à implémenter si utilisé
   }
 }

@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "allowImportingTsExtension": "true",
+    "allowImportingTsExtensions": true,
     "types": ["node", "next"],
     "baseUrl": "./src",
     "paths": {
@@ -23,7 +23,8 @@
       ],
       "@idl/*": [
         "anchor/target/idl/*"
-      ]
+      ],
+      "@utils/*": ["utils/*"]
     },
     "typeRoots": [
       "./node_modules/@types",
@@ -49,7 +50,8 @@
     "test/**/*.*",
     "test/**/*.ts", // ou "tests/**/*.ts" si tu as des tests TS
     "test/**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "types/**/*"
   ],
   "exclude": [
     "node_modules",

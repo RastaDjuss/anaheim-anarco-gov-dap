@@ -19,5 +19,5 @@ export async function getStakeActivationSafe(
   // 👇 TypeScript la marque comme dépréciée, mais elle est encore correcte
   // On ignore le warning car aucune alternative réelle n'existe
   // eslint-disable-next-line deprecation/deprecation
-  return await connection.getStakeActivation(pubkey, config)
+  return await connection.getStakeActivation(pubkey)
 }

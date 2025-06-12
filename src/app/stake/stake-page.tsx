@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Connection, PublicKey, StakeActivationData } from '@solana/web3.js'
 import { useSolanaClient } from '@/hooks/solana/useSolanaClient'
-import { getStakeActivationSafe } from '@/lib/solana/staking'
+import { getStakeActivationSafe } from '@/components/stake/staking.tsx'
 
 export default function StakePage() {
   const connection: Connection = useSolanaClient('devnet')

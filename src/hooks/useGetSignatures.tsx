@@ -1,6 +1,6 @@
 // hooks/useGetSignatures.ts
 import { useQuery } from '@tanstack/react-query'
-import { Address } from './useGetBalance'
+import { Address } from './solana/useGetBalance.tsx'
 import { useWalletUi, useWalletUiCluster } from '@/components/wallet/wallet-hooks.js'
 
 export function useGetSignatures({ address }: { address: Address }) {

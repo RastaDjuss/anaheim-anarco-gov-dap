@@ -14,7 +14,7 @@ export function StakeViewer({ pubkey }: { pubkey: PublicKey }) {
     async function fetchStakeActivation() {
       try {
         const anyConnection = connection as any
-        const activation = await anyConnection.getStakeActivation(pubkey, config)
+        const activation = await anyConnection.getStakeActivation(pubkey)
         setData(activation)
       } catch (e) {
         setError('Erreur lors de la récupération des données de stake activation')

@@ -1,8 +1,8 @@
 // hooks/useGetTokenAccounts.ts
 import { useQuery } from '@tanstack/react-query'
 import { PublicKey } from '@solana/web3.js'
-import { useConnection } from './useConnection'
-import { Address } from './useGetBalance'
+import { useConnection } from './useConnection.tsx'
+import { Address } from './useGetBalance.tsx'
 
 export function useGetTokenAccounts({ address }: { address: Address }) {
   const connection = useConnection()

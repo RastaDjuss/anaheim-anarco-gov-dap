@@ -2,12 +2,12 @@
 
 import { useEffect } from 'react'
 import { PublicKey } from '@solana/web3.js'
-import { useWrappedConnection } from '@/hooks/useWrappedConnection'
+import { useWrappedConnection } from '@/hooks/solana/useWrappedConnection.tsx'
 import { getClusterUrl } from '@/hooks/getClusterUrl'
 import { ClusterDisplay } from '@/components/cluster/cluster-ui'
-import { ClusterLabel } from '@/hooks/getClusterConfig'
 
 const DEFAULT_ADDRESS = '9xQeWvG816bUx9EPZ2gfrzjp1edw6uX7yjzFZZLL8Mjt'
+const CLUSTER = "devnet"
 
 export function Rapper() {
   const rpcUrl = getClusterUrl(CLUSTER)

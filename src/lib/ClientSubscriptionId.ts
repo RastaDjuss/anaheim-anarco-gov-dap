@@ -13,16 +13,16 @@ let counter = 0
  * @param prefix A custom string to prepend (default: 'sub')
  * @returns A unique client subscription ID string
  */
+export class ClientSubscriptionId {
+}
+
+let counter = 0
+
 export function generateClientSubscriptionId(prefix = 'sub'): string {
   return `${prefix}-${Date.now()}-${++counter}`
 }
 
-/**
- * Reset the internal counter (for testing or app reload).
- */
-export function resetClientSubscriptionCounter(): void {
+export function resetClientSubscriptionCounter() {
   counter = 0
 }
 
-export class ClientSubscriptionId {
-}
