@@ -1,0 +1,9 @@
+{
+  "[project]/node_modules/.pnpm/@wallet-ui+react@1.0.0_fastestsmallesttextencoderdecoder@1.0.22_react-dom@19.1.0_react@_190c28e98b436854ea26abc14393a9f2/node_modules/@wallet-ui/react/dist/index.browser.mjs [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/node_modules/.pnpm/@wallet-ui+react@1.0.0_fastestsmallesttextencoderdecoder@1.0.22_react-dom@19.1.0_react@_190c28e98b436854ea26abc14393a9f2/node_modules/@wallet-ui/react/dist/index.browser.mjs [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/b0214_@wallet-ui_react_dist_index_browser_mjs_f0dd7433._.js",
+      "static/chunks/b0214_@wallet-ui_react_dist_index_browser_mjs_4dcbbc89._.js"
+    ]
+  }
+}

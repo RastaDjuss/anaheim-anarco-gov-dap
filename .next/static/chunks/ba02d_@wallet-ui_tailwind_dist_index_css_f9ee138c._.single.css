@@ -1,0 +1,234 @@
+/* [project]/node_modules/.pnpm/@wallet-ui+tailwind@1.1.0-canary-20250323230043_tailwindcss@4.1.10/node_modules/@wallet-ui/tailwind/dist/index.css [app-client] (css) */
+@apply bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700;
+
+@apply text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white;
+
+@apply border border-gray-200 dark:border-gray-700;
+
+@apply rounded-md shadow-sm cursor-pointer;
+
+@apply flex items-center justify-center gap-2 whitespace-nowrap;
+
+@apply disabled:cursor-not-allowed disabled:opacity-50;
+
+@apply px-3 py-1.5;
+
+@apply text-sm;
+
+@apply font-normal;
+
+@apply px-4 py-3;
+
+@apply text-base;
+
+@apply font-semibold;
+
+@apply px-6 py-4;
+
+@apply text-lg;
+
+@apply font-bold;
+
+@apply mr-1;
+
+@apply text-xs;
+
+@apply mr-2;
+
+@apply text-sm;
+
+@apply mr-4;
+
+@apply text-xl;
+
+@apply ml-1;
+
+@apply text-xs;
+
+@apply ml-2;
+
+@apply text-sm;
+
+@apply ml-4;
+
+@apply text-xl;
+
+@apply bg-gray-100 dark:bg-gray-800;
+
+@apply border border-gray-200 dark:border-gray-700;
+
+@apply rounded-md;
+
+@apply flex items-center gap-2;
+
+@apply bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700;
+
+@apply text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white;
+
+@apply px-4 py-2;
+
+@apply cursor-pointer;
+
+@apply mr-1;
+
+@apply ml-1;
+
+@apply fixed top-0 left-0 bottom-0 w-full z-20;
+
+@apply bg-black / 40 dark:bg-black / 70;
+
+@apply fixed top-0 left-0 bottom-0 w-full z-20;
+
+@apply flex items-center justify-center;
+
+@apply w-full overflow-hidden shadow-lg;
+
+@apply bg-white dark:bg-gray-900;
+
+@apply border border-gray-100 dark:border-gray-900;
+
+@apply rounded-xl outline-0;
+
+@apply flex items-center justify-end;
+
+@apply pb-4;
+
+@apply flex items-center justify-center;
+
+@apply text-center text-gray-900 dark:text-gray-200;
+
+@apply border border-gray-500 / 40 dark:border-gray-600 / 40;
+
+@apply cursor-pointer hover:bg-gray-500 / 40 dark:hover:bg-gray-600 / 40;
+
+@apply flex items-center justify-center;
+
+@apply text-gray-700 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white;
+
+[data-scope="dialog"][data-part="content"][data-state="open"] {
+  animation: .3s ease-out anim-scale-in;
+}
+
+[data-scope="dialog"][data-part="content"][data-state="closed"] {
+  animation: .2s ease-in anim-scale-out;
+}
+
+@apply max-w-3xs;
+
+@apply p-2 rounded-md;
+
+@apply max-w-sm mx-4;
+
+@apply p-2 rounded-lg;
+
+@apply max-w-lg mx-auto;
+
+@apply p-4 rounded-xl;
+
+@apply pb-2;
+
+@apply text-sm;
+
+@apply pb-4;
+
+@apply text-2xl;
+
+@apply pb-4;
+
+@apply text-3xl;
+
+@apply h-6 w-6 rounded-full;
+
+@apply h-8 w-8 rounded-full;
+
+@apply h-10 w-10 rounded-full;
+
+@apply pb-2 px-4;
+
+@apply text-sm;
+
+@apply pb-8 px-16;
+
+@apply text-2xl;
+
+@apply pb-8 px-16;
+
+@apply text-3xl;
+
+@apply border-0;
+
+@apply rounded-xs;
+
+@apply h-[16px] w-[16px];
+
+@apply rounded-md;
+
+@apply h-[24px] w-[24px];
+
+@apply rounded-lg;
+
+@apply h-[32px] w-[32px];
+
+@apply text-gray-500 dark:text-gray-200;
+
+@apply text-xs;
+
+@apply font-light;
+
+@apply text-base;
+
+@apply font-normal;
+
+@apply text-xl;
+
+@apply font-semibold;
+
+@apply flex items-center gap-2;
+
+@apply whitespace-nowrap;
+
+@apply cursor-pointer select-none appearance-none disabled:cursor-not-allowed disabled:opacity-50;
+
+@apply hover:bg-gray-200 dark:hover:bg-gray-800;
+
+@apply px-1 py-1 rounded-md;
+
+@apply px-2 py-2 rounded-lg;
+
+@apply px-3 py-3 rounded-xl;
+
+@apply flex flex-col;
+
+@apply gap-1;
+
+@apply gap-2;
+
+@apply gap-3;
+
+@reference "tailwindcss";
+
+@keyframes anim-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes anim-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(.95);
+  }
+}
+
+/*# sourceMappingURL=ba02d_%40wallet-ui_tailwind_dist_index_css_f9ee138c._.single.css.map*/

@@ -5,8 +5,8 @@ import { AppAlert } from '@/components/app-alert'
 import { useSolanaClient } from 'gill-react'
 
 // 🚨 Ces hooks doivent être utilisés avec `new` selon ta contrainte
-import { useWalletUi } from '@/components/solana/wallet/wallet-hooks'
-import { useWalletUiCluster } from '@/components/solana/wallet/wallet-hooks'
+import { useWalletUi } from '@/hooks/wallet/wallet-hooks.ts'
+import { useWalletUiCluster } from '@/hooks/wallet/wallet-hooks.ts'
 console.log('WalletUI:', useWalletUi())
 
 export function ClusterChecker({ children }: { children: ReactNode }) {

@@ -1,7 +1,7 @@
 // hooks/useGetSignatures.ts
 import { useQuery } from '@tanstack/react-query'
 import { Address } from '@/hooks/solana/useGetBalance'
-import { useWalletUi, useWalletUiCluster } from '../components/solana/wallet/wallet-hooks'
+import { useWalletUi, useWalletUiCluster } from './wallet/wallet-hooks.ts'
 import cluster from 'node:cluster'
 
 interface WalletUiRpc {
