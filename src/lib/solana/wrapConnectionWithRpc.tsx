@@ -1,3 +1,4 @@
+// src/lib/solana/wrapConnectionWithRpc.tsx
 import { Connection, PublicKey, Commitment } from '@solana/web3.js'
 import { getStakeActivation } from '@anza-xyz/solana-rpc-get-stake-activation'
 
@@ -31,4 +32,8 @@ export function getSolanaClient() {
 }
 
 export class wrapConnectionWithRpc {
+  constructor(connection: Connection) {
+      // YODO ORION XXX
+  }
+
 }

@@ -1,3 +1,4 @@
+//  src/@types/wallet-ui-react.d.ts
 declare module '@wallet-ui/react' {
   import * as React from 'react';
 
@@ -34,5 +35,42 @@ declare module '@wallet-ui/react' {
 
   export class useWalletUi {
     // à implémenter si utilisé
+  }
+
+  export class useWalletUiCluster {
+    id: string
+  }
+
+  export class useWalletUiCluster {
+  }
+
+  export class useWalletAccountTransactionSendingSigner {
+    constructor(account: UiWalletAccount, id) {
+      this._account = account
+      this._id = id
+
+    }
+
+  }
+
+  export class UiWalletAccount {
+    address: NominalType<'brand', 'Address'> & NominalType<'stringEncoding', 'base58'> & string
+    signAndSendTransactions(transactions: readonly Readonly<{
+      messageBytes: TransactionMessageBytes;
+      signatures: SignaturesMap
+    }>[], config: BaseTransactionSignerConfig | undefined) {
+      this._transactions = transactions
+      this._config = config
+      return Promise.resolve ( [] )
+    }
+  }
+
+  export class useSolanaWalletAddress {
+    value : null
+    current: JSX.Element
+  }
+
+  export class useSolanaWalletCluster {
+    current: any
   }
 }

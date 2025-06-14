@@ -17,10 +17,9 @@
     "types": ["node", "next"],
     "baseUrl": "./src",
     "paths": {
+      "vendor/*": ["../vendor/*"],
+      "@/*": ["*"],
       "@wallet-ui/react": ["node_modules/@wallet-ui/react"],
-      "@/*": [
-        "./*"
-      ],
       "@idl/*": [
         "anchor/target/idl/*"
       ],
@@ -37,7 +36,13 @@
       }
     ]
   },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+
   "include": [
+    "vendor/solana-rpc-client-extensions/js/src/buffer.ts",
     "*.ts",
     "*.tsx",
     "anchor/**/*.ts",

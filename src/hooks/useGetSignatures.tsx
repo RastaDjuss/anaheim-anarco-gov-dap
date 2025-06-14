@@ -1,14 +1,27 @@
 // hooks/useGetSignatures.ts
 import { useQuery } from '@tanstack/react-query'
-import { Address } from './solana/useGetBalance.tsx'
-import { useWalletUi, useWalletUiCluster } from '@/components/wallet/wallet-hooks.js'
+import { Address } from '@/hooks/solana/useGetBalance'
+import { useWalletUi, useWalletUiCluster } from '../components/solana/wallet/wallet-hooks'
+import cluster from 'node:cluster'
+
+interface WalletUiRpc {
+  getSignaturesForAddress: (address: Address) => {
+    send: () => Promise<unknown>
+  }
+}
+
+interface WalletUiReturn {
+  client: {
+    rpc: WalletUiRpc
+  }
+}
 
 export function useGetSignatures({ address }: { address: Address }) {
-  const { client } = useWalletUi () as unknown as { client: { rpc: any } } // ou mieux : typé proprement
-  const { cluster } = useWalletUiCluster()
+  const { client } = useWalletUi () as unknown as WalletUiReturn
 
-  if (!client.rpc) {
-    throw new Error('client.rpc is undefined — verify your client setup')
+
+  if (!client?.rpc?.getSignaturesForAddress) {
+    throw new Error('client.rpc.getSignaturesForAddress is undefined')
   }
 
   return useQuery({
@@ -16,4 +29,3 @@ export function useGetSignatures({ address }: { address: Address }) {
     queryFn: () => client.rpc.getSignaturesForAddress(address).send(),
   })
 }
-

@@ -1,23 +1,17 @@
-import {
-  Connection,
-  PublicKey,
-  StakeActivationData,
-  GetStakeActivationConfig,
-} from '@solana/web3.js'
+import { Connection, PublicKey } from '@solana/web3.js'
+import { getStakeActivation } from "@/../../vendor/solana-rpc-client-extensions/js/src/stake"
 
-/**
- * Wrapper autour de la méthode dépréciée, utilisée proprement malgré le warning TS.
- */
+
 export async function getStakeActivationSafe(
   connection: Connection,
-  pubkey: PublicKey
-): Promise<StakeActivationData> {
-  const config: GetStakeActivationConfig = {
-    commitment: 'confirmed',
-  }
+  pubkey: PublicKey,
+): Promise<getStakeActivation> {
+  try {
+    return new getStakeActivation ( connection, pubkey, 'confirmed' ) // <-- utilise la version non-dépréciée ici
+    // <-- utilise la version non-dépréciée ici
+  } catch (e) {
 
-  // 👇 TypeScript la marque comme dépréciée, mais elle est encore correcte
-  // On ignore le warning car aucune alternative réelle n'existe
-  // eslint-disable-next-line deprecation/deprecation
-  return await connection.getStakeActivation(pubkey)
+    console.error('getStakeActivation (safe) failed', e)
+    throw e
+  }
 }

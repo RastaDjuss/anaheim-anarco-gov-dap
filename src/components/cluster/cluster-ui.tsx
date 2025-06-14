@@ -1,50 +1,36 @@
-'use client'
-
 import { useQuery } from '@tanstack/react-query'
-import React, { ReactNode } from 'react'
-import { getExplorerLink, GetExplorerLinkArgs } from 'gill'
+import { ReactNode } from 'react'
 import { Button } from '@/components/ui/button'
 import { AppAlert } from '@/components/app-alert'
-import { useWalletUi, useWalletUiCluster } from '@/components/wallet/wallet-hooks'
-import { useClusterConfig, ClusterLabel } from '@/hooks/getClusterConfig'
+import { useSolanaClient } from 'gill-react'
 
-export function ClusterDisplay({ clusterLabel }: { clusterLabel: ClusterLabel }) {
-  const config = useClusterConfig(clusterLabel)
-
-  return (
-    <div className="text-xs text-gray-300">
-      Cluster: <span className="font-semibold">{config.label}</span><br />
-      Endpoint: <code className="text-yellow-400">{config.urlOrMoniker}</code>
-    </div>
-  )
-}
-export function ExplorerLink({
-                               className,
-                               label = '',
-                               ...link
-                             }: GetExplorerLinkArgs & {
-  className?: string
-  label: string
-}) {
-  return (
-    <a
-      href={getExplorerLink(link)}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={className ?? 'link font-mono'}
-    >
-      {label}
-    </a>
-  )
-}
+// 🚨 Ces hooks doivent être utilisés avec `new` selon ta contrainte
+import { useWalletUi } from '@/components/solana/wallet/wallet-hooks'
+import { useWalletUiCluster } from '@/components/solana/wallet/wallet-hooks'
+console.log('WalletUI:', useWalletUi())
 
 export function ClusterChecker({ children }: { children: ReactNode }) {
-  const { client } = useWalletUi()
-  const { cluster } = useWalletUiCluster()
+  const walletUi = useWalletUi()
+  const cluster = useWalletUiCluster()
+
+  const client = useSolanaClient()
+  if (!client) {
+    return (
+      <AppAlert action={<Button variant="outline">Retry</Button>}>
+        Solana client unavailable — connection impossible.
+      </AppAlert>
+
+    )
+  }
+
+  // 💡 Tu dois extraire `label` et `urlOrMoniker` de `cluster`
+  // Si cluster est typé faible, fais une vérification défensive :
+  const label = (cluster as any).label ?? 'unknown'
+  const endpoint = (cluster as any).urlOrMoniker ?? 'unknown'
 
   const query = useQuery({
-    queryKey: ['version', { cluster, endpoint: cluster.urlOrMoniker }],
-    queryFn: () => client.getVersion(),
+    queryKey: ['version', { cluster: label, endpoint }],
+    queryFn: () => client.rpc.getVersion(), // ✅ le chemin correct vers le client RPC
     retry: 1,
   })
 
@@ -59,7 +45,7 @@ export function ClusterChecker({ children }: { children: ReactNode }) {
           </Button>
         }
       >
-        Error connecting to cluster <span className="font-bold">{cluster.label}</span>.
+        Error connecting to cluster <span className="font-bold">{label}</span>.
       </AppAlert>
     )
   }

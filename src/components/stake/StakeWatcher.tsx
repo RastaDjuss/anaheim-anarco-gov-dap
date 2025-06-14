@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
-import { useSolanaClient } from '@/hooks/solana/useSolanaClient.tsx'
+import { useEffect, useMemo } from 'react'
+import { useSolanaClient } from '@/hooks/solana/useSolanaClient'
 import { PublicKey } from '@solana/web3.js'
 
 export function StakeWatcher({ address }: { address: string }) {
   const client = useSolanaClient()
-  const pubkey = new PublicKey(address)
+
+  const pubkey = useMemo(() => new PublicKey(address), [address])
 
   useEffect(() => {
     const id = client.onAccountChange(pubkey, (info) => {
@@ -14,7 +15,7 @@ export function StakeWatcher({ address }: { address: string }) {
     return () => {
       client.removeAccountChangeListener(id).catch(console.error)
     }
-  }, [client, pubkey])
+  }, [client, pubkey]) // maintenant `pubkey` est stable
 
   return null
 }

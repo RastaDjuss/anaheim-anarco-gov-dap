@@ -15,9 +15,9 @@ pub use contexts::create_user::CreateUser as CreateUserContext;
 pub use utils::validation::string_utils::str_to_fixed_array;
 pub use contexts::create_user::CreateUser;
 pub use instructions::create_user;
-use crate::contexts::create_user::__client_accounts_create_user;
 
-declare_id!("78aAD6rT9QNwjXEUwrrTwRdtE35khVh1opAQLjMsxvVb");
+
+declare_id!("3v9bRTpKzMeM4u3TcXJEiXeK3tFSZsMZP45iRLeBL1QZ");
 
 #[program]
 pub mod anaheim {

@@ -1,6 +1,7 @@
 // src/hooks/solana/useSolanaClient.ts
-import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js'
-import { useMemo } from 'react'
+import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js';
+import { useMemo } from 'react';
+import { getStakeActivation } from '@anza-xyz/solana-rpc-get-stake-activation';
 
 export function useSolanaClient(cluster: 'devnet' | 'testnet' | 'mainnet-beta' = 'devnet') {
   // 🔁 Memoize connection to avoid re-instantiating on each render
@@ -11,21 +12,60 @@ export function useSolanaClient(cluster: 'devnet' | 'testnet' | 'mainnet-beta' =
 
 
 // TODO: future fallback for deprecated getStakeActivation
-export async function getStakeActivationManual(connection: Connection, pubkey: PublicKey) {
+async function getStakeActivationManual(connection: Connection, pubkey: PublicKey) {
   const accountInfo = await connection.getParsedAccountInfo(pubkey)
-  const parsed = accountInfo.value?.data
 
-  if (!parsed || typeof parsed !== 'object' || !('parsed' in parsed)) {
+  const data = accountInfo.value?.data
+  if (!data || typeof data !== 'object' || !('parsed' in data)) {
     throw new Error('Invalid or empty stake account')
   }
 
-  const stake = (parsed as any).parsed.info.stake
-  const active = stake.delegation.stake
-  const state = (parsed as any).parsed.info.state
+  const parsed = data as ParsedAccountData
+
+  if (parsed.program !== 'stake') {
+    throw new Error('Not a stake account')
+  }
+
+  const info = parsed.parsed.info
+  const stake = info.stake
+  const state = info.state
+
+  const active = stake?.delegation.stake ?? 0
 
   return {
     state,
     active,
-    inactive: 0, // manuellement, on ne peut pas l’estimer sans epoch info
+    inactive: 0, // fallback since we can't infer it here
+  }
+}
+export async function getStakeActivationSafe(
+  connection: Connection,
+  pubkey: PublicKey
+) {
+  try {
+    // ✅ Appel correct avec deux arguments
+    return await getStakeActivation ( connection, pubkey )
+  } catch (err) {
+    console.warn('Vendor getStakeActivation failed, falling back manually', err)
+    return await getStakeActivationManual(connection, pubkey)
+  }
+}
+
+
+type ParsedAccountData = {
+  program: 'stake'
+  parsed: {
+    type: string
+    info: {
+      state: string
+      stake?: {
+        delegation: {
+          stake: number
+          activationEpoch: string
+          deactivationEpoch: string
+          voter: string
+        }
+      }
+    }
   }
 }

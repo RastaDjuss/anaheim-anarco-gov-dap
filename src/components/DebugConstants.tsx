@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react'
 import { CLUSTER, DEFAULT_ADDRESS, PROGRAM_IDS } from '@/lib/constants'
 

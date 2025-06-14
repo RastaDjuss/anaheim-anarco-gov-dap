@@ -1,3 +1,4 @@
+ // src/app/stake/stake-page.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -13,7 +14,7 @@ export default function StakePage() {
     const fetch = async () => {
       const pubkey = new PublicKey('9xQeWvG816bUx9EPZ2gfrzjp1edw6uX7yjzFZZLL8Mjt')
       try {
-        const data = await getStakeActivationSafe(connection, pubkey)
+        const data = await getStakeActivationSafe(connection)
         setActivation(data)
       } catch (err) {
         console.error('Stake fetch failed:', err)

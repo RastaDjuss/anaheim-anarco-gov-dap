@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { PublicKey } from '@solana/web3.js'
+import { PublicKey, ConfirmedSignatureInfo } from '@solana/web3.js'
 import { useWrappedConnection } from '@/hooks/solana/useWrappedConnection.tsx'
 import { getClusterUrl } from '@/hooks/getClusterUrl'
 import { ClusterDisplay } from '@/components/cluster/cluster-ui'
@@ -18,7 +18,7 @@ export function Rapper() {
     wrapped.rpc
       .getSignaturesForAddress(address)
       .send()
-      .then((sigs: any) => {
+      .then((sigs: ConfirmedSignatureInfo[]) => {
         console.log(`Signatures for ${DEFAULT_ADDRESS}:`, sigs)
       })
       .catch(console.error)

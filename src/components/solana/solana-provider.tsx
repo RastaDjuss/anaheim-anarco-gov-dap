@@ -2,12 +2,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import '@wallet-ui/tailwind/index.css'
 import * as WalletUI from '@wallet-ui/react'
+import type { WalletUiDropdownProps } from '@wallet-ui/react';
 
-// Le init ne prend pas d'argument, on l'appelle donc simplement sans passer config
-const maybeInit = (WalletUI as any)?.WalletUi?.init as (() => void) | undefined
+// Typage précis du maybeInit, pour sortir de l'ombre "any"
+const maybeInit = (WalletUI as { WalletUi?: { init?: () => void } }).WalletUi?.init
 
 if (typeof maybeInit === 'function') {
   maybeInit()
@@ -17,10 +18,12 @@ export function SolanaProvider({ children }: { children: ReactNode }) {
   return <>{children}</>
 }
 
+// Chargement dynamique des composants avec la clé .default et extraction des sous-composants
 export const WalletButton = dynamic(
   () =>
     import('@wallet-ui/react').then(
-      (m: { WalletUiDropdown: React.ComponentType<any> }) => m.WalletUiDropdown,
+      (mod) => mod.default.WalletUiDropdown as React.ComponentType<WalletUiDropdownProps>
+
     ),
   { ssr: false },
 )
@@ -28,8 +31,8 @@ export const WalletButton = dynamic(
 export const ClusterButton = dynamic(
   () =>
     import('@wallet-ui/react').then(
-      (m: { WalletUiClusterDropdown: React.ComponentType<any> }) =>
-        m.WalletUiClusterDropdown,
+      (mod) => mod.default.WalletUiDropdown as React.ComponentType<WalletUiDropdownProps>
+
     ),
   { ssr: false },
 )
