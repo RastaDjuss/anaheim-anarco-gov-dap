@@ -1,2 +1,18 @@
 *.log filter=lfs diff=lfs merge=lfs -text
 *.sst filter=lfs diff=lfs merge=lfs -text
+# Large files: IDLs, test-ledger, JSON snapshots
+idl/**/*.json filter=lfs diff=lfs merge=lfs -text
+test-ledger/**/* filter=lfs diff=lfs merge=lfs -text
+dist/**/*.wasm filter=lfs diff=lfs merge=lfs -text
+
+# Assets, media, docs
+public/**/*.{png,jpg,jpeg,svg,gif,mp4,webm} filter=lfs diff=lfs merge=lfs -text
+assets/**/*.{png,jpg,jpeg,svg,gif,mp4,webm} filter=lfs diff=lfs merge=lfs -text
+
+# Anchor generated binaries
+target/deploy/*.so filter=lfs diff=lfs merge=lfs -text
+git lfs track "idl/**/*.json"
+git lfs track "dist/**/*.wasm"
+git lfs track "target/deploy/*.so"
+git lfs track "test-ledger/**/*"
+git lfs track "public/**/*.{png,jpg,svg}"
